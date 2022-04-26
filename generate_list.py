@@ -25,8 +25,6 @@ def image_gen(tar_file_path, inpath, outpath):
     all_datapoint_paths = [os.path.abspath(p) for p in all_datapoint_paths]
     #generate random
     all_datapoint_paths = np.random.permutation(all_datapoint_paths)
-    #for filePath in all_datapoint_paths:
-    #    print("{}".format(filePath))
     datapoint_df = pd.DataFrame({'path': all_datapoint_paths})
     datapoint_df.to_csv(outpath+'/'+'total_path.lst',index=False)
     datapoint_list = list(datapoint_df['path'])

@@ -71,9 +71,6 @@ class Comparison(object):
         if gaussian_blur_radius_list is not None:
             for radius in gaussian_blur_radius_list:
                 gray = cv2.GaussianBlur(gray, (radius, radius), 0)
-                # gray = gray1 - gray2 #DoG
-                # cv2.imwrite('/home/ram/Downloads/norm.png',normalized_image)
-        # median = cv2.medianBlur(gray, 5)
         gray = Comparison.draw_color_mask(gray, black_mask)
 
         return gray
@@ -102,13 +99,7 @@ class Comparison(object):
         return score, thresh
 
     def standardization(self, img, bit_depth=12):
-        # mean = np.mean(img)
-        # variance = np.var(img)
-        # img = (img - mean)/variance
         img = img / float((2 ** bit_depth) - 1)
-        # from IPython import embed;embed()
-        # img2 = img2 / float((2**bit_depth)-1)
-
         return img
 
     def histogram_matching(self, img1_pre, img2_pre):

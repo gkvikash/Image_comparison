@@ -25,25 +25,17 @@ if __name__ == '__main__':
                         default=1000)
     parser.add_argument('-m', '--hist-match', dest='hist_match', type=bool, help='use histogram match to compare.',
                         default=False)
-    # parser.add_argument('-c','--camera-names', dest='camera_number',   type=str, help='compare images from the given cameras numbers', nargs=4, required=True)
 
     args = parser.parse_args()
-    # camera_number_lst = []
-    # dp_list_c1 = []
-    # dp_list_c2 = []
-    # dp_list_c3 = []
-    # dp_list_c4 = []
+
     filepath = args.tar_file
     inpath = args.input_path
     outpath = args.output_lst
     hist_match = args.hist_match
     threshold_score_value = args.score_thresh
     gaussian_blur_radius_list = args.gaussian_kernel
-    # from IPython import embed;embed()
-    # assert len(camera_number_lst)>1
     dp_list = generate_list.image_gen(filepath, inpath, outpath)
     img_comparison = Comparison(hist_match, bit_depth=12, min_contour_area=100)
-    # dp_list = img_comparison.get_datapoint_list("path to input lst")
     n = 2
     removed_img_lst = []
     loaded_img_list = []
@@ -51,9 +43,7 @@ if __name__ == '__main__':
         load_img = cv2.imread(read_img)
         load_img = img_comparison.preprocess_image_change_detection(load_img, gaussian_blur_radius_list)
         load_img = cv2.resize(load_img, (800,600), interpolation=cv2.INTER_LANCZOS4)
-        # load_img = img_comparison.standardization(load_img)
         loaded_img_list.append(load_img)
-    # from IPython import embed;embed()
     for (img1, img2), (path_img1, path_img2) in zip(combinations(loaded_img_list.copy(), n),
                                                     combinations(dp_list.copy(), n)):
 
@@ -74,9 +64,7 @@ if __name__ == '__main__':
                 if os.path.exists(path_img2):
                     if path_img2 in dp_list:
                         dp_list.remove(path_img2)
-                # else:
-                # print("The file does not exist")
-    # images in the folder are removed
+
     for rem in removed_img_lst:
         if os.path.exists(rem):
             os.remove(rem)

@@ -6,7 +6,7 @@ Create list of images to compare using absolute difference and thresholding
 
 ## Command for execution
 
-'''
-python new_imp.py -i "input path of folder" -o "output path"
-'''
+```
+python new_imp.py -t "tar file path"-i "input path of folder" -o "output path"
+```
 
